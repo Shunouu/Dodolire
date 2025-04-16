@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Dodolire</string>
+</resources><resources>
+<!-- Nom de l'application -->
+<string name="app_name">DodoLire</string>
+
+<!-- Écran d'accueil -->
+<string name="commencer">Commencer</string>
+<string name="bienvenue_sur">Bienvenue sur</string>
+<string name="nom_de_la_creche">Nom de la crèche</string>
 </resources>
