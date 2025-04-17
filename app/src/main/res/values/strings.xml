@@ -42,4 +42,32 @@
     <string name="informations">Informations</string>
     <string name="deconnexion">Déconnexion</string>
 
+    <!-- StoryActivity -->
+    <string name="image_histoire">Image de l\'histoire</string>
+    <string name="image_scroll_description">Défilement des images de l\'histoire</string>
+    <string name="histoire_precedente">Histoire précédente</string>
+    <string name="histoire_suivante">Histoire suivante</string>
+    <string name="quitter">Quitter</string>
+    <string name="recommencer">Recommencer</string>
+    <string name="archiver">Archiver</string>
+    <string name="histoire_archivee">Histoire archivée</string>
+    <string name="menu_ouvert">Menu ouvert</string>
+    <string name="story_title_placeholder">Titre de l\'histoire</string>
+    <string name="story_content_placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Doloremque illo quod impedit, id rem adipisci quasi, nostrum illum itaque fuga et! Consequuntur
+        reiciendis quam dicta veniam perspiciatis,cum sunt quo?Lorem ipsum, dolor sit amet consectetur
+        adipiscing elit.Impedit quasi labore tempora sit soluta consectetur quibusdam odio corrupti
+        laborum sapiente neque itaque, omnis atque.Ipsum omnis nobis consequatur enim error.
+        Iordipisicing elit. Impedit quasi labore tempora sit soluta consectetur quibusdam odio corrupti
+        laborum sapiente neque itaque, omnis atque. Ipsum omnis nobis consequatur enim error.lor</string>
+
+    <!-- Archives -->
+    <string name="archives">Archives</string>
+    <string name="formulaire">Formulaire</string>
+    <string name="lecture_audio">Lecture audio</string>
+    <string name="pause_audio">Pause audio</string>
+    <string name="no_archives">Aucune histoire archivée</string>
+    <string name="tap_to_read">Appuyer pour lire</string>
+
+    <string name="liste_archives">Liste des histoires archivées</string>
 </resources>

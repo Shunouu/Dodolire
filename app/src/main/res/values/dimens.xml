@@ -1,0 +1,12 @@
+<resources>
+    <dimen name="story_image_width">250dp</dimen>
+    <dimen name="card_corner_radius">8dp</dimen>
+    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="card_margin_bottom">16dp</dimen>
+    <dimen name="card_padding">12dp</dimen>
+    <dimen name="archive_image_width">80dp</dimen>
+    <dimen name="archive_image_height">80dp</dimen>
+    <dimen name="text_margin_start">12dp</dimen>
+    <dimen name="date_margin_top">4dp</dimen>
+    <dimen name="tap_margin_top">8dp</dimen>
+</resources>
