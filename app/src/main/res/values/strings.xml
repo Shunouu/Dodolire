@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">Dodolire</string>
-</resources><resources>
 <!-- Nom de l'application -->
 <string name="app_name">DodoLire</string>
 
