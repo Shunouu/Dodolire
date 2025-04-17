@@ -27,4 +27,14 @@
     <string name="logo_application">Logo de l\'application</string>
     <string name="profil_utilisateur">Profil utilisateur</string>
 
+    <!-- Profil -->
+    <string name="profil">Profil</string>
+    <string name="retour">Retour</string>
+    <string name="informations">Informations</string>
+    <string name="telephone">Téléphone</string>
+    <string name="adresse">Adresse</string>
+    <string name="parametres">Paramètres</string>
+    <string name="notifications">Notifications</string>
+    <string name="deconnexion">Déconnexion</string>
+
 </resources>
