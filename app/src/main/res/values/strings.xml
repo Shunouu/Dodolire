@@ -1,9 +1,30 @@
 <resources>
-<!-- Nom de l'application -->
-<string name="app_name">DodoLire</string>
+    <!-- Nom de l'application -->
+    <string name="app_name">DodoLire</string>
 
-<!-- Écran d'accueil -->
-<string name="commencer">Commencer</string>
-<string name="bienvenue_sur">Bienvenue sur</string>
-<string name="nom_de_la_creche">Nom de la crèche</string>
+    <!-- Écran d'accueil -->
+    <string name="commencer">Commencer</string>
+    <string name="bienvenue_sur">Bienvenue sur</string>
+    <string name="nom_de_la_creche">Nom de la crèche</string>
+
+    <!-- Formulaire de génération d'histoire -->
+    <string name="type_generation">Que veux-tu générer ?</string>
+    <string name="age_enfant">Âge du public</string>
+    <string name="theme_histoire">Thème</string>
+    <string name="genre_personnage">Genre du personnage</string>
+    <string name="prenom_personnage">Prénom du personnage</string>
+    <string name="mot_cle">Mot-clé pour ton histoire</string>
+
+    <!-- Placeholders -->
+    <string name="hint_prenom">Ex : Léo, Emma...</string>
+    <string name="hint_mot_cle">Ex : Magie, courage, arc-en-ciel</string>
+
+    <!-- Boutons -->
+    <string name="btn_generer">Générer</string>
+
+    <!-- Accessibilité -->
+    <string name="menu_burger">Menu principal</string>
+    <string name="logo_application">Logo de l\'application</string>
+    <string name="profil_utilisateur">Profil utilisateur</string>
+
 </resources>
