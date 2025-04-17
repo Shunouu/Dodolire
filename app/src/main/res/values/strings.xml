@@ -7,6 +7,15 @@
     <string name="bienvenue_sur">Bienvenue sur</string>
     <string name="nom_de_la_creche">Nom de la crèche</string>
 
+    <!-- Connexion -->
+    <string name="email">Email</string>
+    <string name="password">Mot de passe</string>
+    <string name="login_button">Se connecter</string>
+    <string name="signup_link">S\'inscrire</string>
+    <string name="btn_register">S\'inscrire</string>
+    <string name="error_message">Message d\'erreur</string>
+    <string name="save_profile">Sauvegarder les modifications</string>
+
     <!-- Formulaire de génération d'histoire -->
     <string name="type_generation">Que veux-tu générer ?</string>
     <string name="age_enfant">Âge du public</string>
