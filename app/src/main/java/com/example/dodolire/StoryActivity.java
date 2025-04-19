@@ -1,158 +1,89 @@
 package com.example.dodolire;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.bumptech.glide.Glide;
 
 public class StoryActivity extends AppCompatActivity {
-
-    private ViewPager2 storyViewPager;
-    private StoryPagerAdapter pagerAdapter;
-    private final List<StoryItem> stories = new ArrayList<>();
-    private ImageView prevButton, nextButton;
+    // 1) Vues du header
+    private ImageView iconMenu, iconProfile;
+    // 2) Vues principales
+    private ImageView generatedImageView;
+    private TextView storyTextView;
+    private Button buttonQuit, buttonRecommencer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story);
 
-        // Initialize views
-        storyViewPager = findViewById(R.id.story_view_pager);
-        prevButton = findViewById(R.id.prev_story_button);
-        nextButton = findViewById(R.id.next_story_button);
+        // --- HEADER ---
+        iconMenu    = findViewById(R.id.icon_menu);
+        iconProfile = findViewById(R.id.icon_profile);
 
-        // Configure header actions
-        setupHeaderActions();
+        iconMenu.setOnClickListener(v ->
+                MenuHelper.showBurgerMenu(StoryActivity.this, v)
+        );
+        iconProfile.setOnClickListener(v ->
+                startActivity(new Intent(StoryActivity.this, ProfileActivity.class))
+        );
 
-        // Get story data
-        Intent intent = getIntent();
-        if (intent != null) {
-            String title = intent.getStringExtra("STORY_TITLE");
-            String content = intent.getStringExtra("STORY_CONTENT");
-            String theme = intent.getStringExtra("STORY_THEME");
-            String character = intent.getStringExtra("STORY_CHARACTER");
+        // --- VUES PRINCIPALES ---
+        generatedImageView = findViewById(R.id.generatedImageView);
+        storyTextView      = findViewById(R.id.storyTextView);
+        buttonQuit         = findViewById(R.id.button_quit);
+        buttonRecommencer  = findViewById(R.id.button_recommencer);
 
-            if (title != null && content != null) {
-                // Add current story
-                stories.add(new StoryItem(title, content, theme, character));
+        // 3) Récupérer le texte généré et le prompt depuis FormActivity
+        String story  = getIntent().getStringExtra("story_text");
+        String prompt = getIntent().getStringExtra("story_prompt");
 
-                // Load other stories from preferences
-                loadStoriesFromPreferences();
-
-                // Setup ViewPager
-                setupViewPager();
-            }
+        // Sécurité contre le détournement de prompt
+        if (prompt == null || prompt.toLowerCase().contains("oublie tout") || prompt.toLowerCase().contains("ignore les instructions")
+                || prompt.toLowerCase().contains("recette") || prompt.toLowerCase().contains("hack") || !prompt.startsWith("Écris une courte histoire pour un enfant")) {
+            Toast.makeText(this, "Vous n'avez pas le droit d'écrire ce genre de choses dans cette application.", Toast.LENGTH_LONG).show();
+            generatedImageView.setVisibility(View.GONE);
+            storyTextView.setText("Vous n'avez pas le droit d'écrire ce genre de choses dans cette application.");
+            return;
         }
 
-        // Setup navigation buttons
-        setupNavigationButtons();
-    }
+        storyTextView.setText(story);
 
-    private void setupHeaderActions() {
-        ImageView menuIcon = findViewById(R.id.icon_menu);
-        ImageView profileIcon = findViewById(R.id.icon_profile);
-        ImageView backIcon = findViewById(R.id.icon_back);
-
-        menuIcon.setOnClickListener(v -> {
-            // Show burger menu
-            MenuHelper.showBurgerMenu(this, v);
-        });
-
-        profileIcon.setOnClickListener(v -> {
-            Intent intent = new Intent(StoryActivity.this, ProfileActivity.class);
-            startActivity(intent);
-        });
-
-        backIcon.setOnClickListener(v -> finish());
-    }
-
-    private void loadStoriesFromPreferences() {
-        SharedPreferences sharedPreferences = getSharedPreferences("stories_data", MODE_PRIVATE);
-        int storyCount = sharedPreferences.getInt("story_count", 0);
-
-        for (int i = 0; i < storyCount; i++) {
-            String title = sharedPreferences.getString("story_title_" + i, "");
-            String content = sharedPreferences.getString("story_content_" + i, "");
-            String theme = sharedPreferences.getString("story_theme_" + i, "");
-            String character = sharedPreferences.getString("story_character_" + i, "");
-
-            // Don't add current story again
-            if (!title.equals(stories.get(0).getTitle())) {
-                stories.add(new StoryItem(title, content, theme, character));
-            }
-        }
-    }
-
-    private void setupViewPager() {
-        pagerAdapter = new StoryPagerAdapter(this, stories);
-        storyViewPager.setAdapter(pagerAdapter);
-
-        // Set page transformer for slide effect
-        storyViewPager.setPageTransformer((page, position) -> {
-            float r = 1 - Math.abs(position);
-            page.setAlpha(0.25f + r * 0.75f);
-            page.setScaleX(0.85f + r * 0.15f);
-        });
-
-        // Add page change listener to stop audio when changing pages
-        storyViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+        // 4) Lancer la génération de l’image (DALL·E) en tâche de fond
+        new AsyncTask<String, Void, String>() {
             @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                // Stop audio when changing page
-                pagerAdapter.stopAllAudio();
-                updateNavigationButtonsVisibility(position);
+            protected String doInBackground(String... params) {
+                return API.generateImage(params[0]);  // Implémente cette méthode dans ton API.java
             }
-        });
-    }
 
-    private void setupNavigationButtons() {
-        prevButton.setOnClickListener(v -> {
-            if (storyViewPager.getCurrentItem() > 0) {
-                // Stop audio before changing page
-                pagerAdapter.stopAllAudio();
-                storyViewPager.setCurrentItem(storyViewPager.getCurrentItem() - 1);
-            }
-        });
-
-        nextButton.setOnClickListener(v -> {
-            if (storyViewPager.getCurrentItem() < stories.size() - 1) {
-                // Stop audio before changing page
-                pagerAdapter.stopAllAudio();
-                storyViewPager.setCurrentItem(storyViewPager.getCurrentItem() + 1);
-            }
-        });
-
-        // Update button visibility based on position
-        storyViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
-            public void onPageSelected(int position) {
-                updateNavigationButtonsVisibility(position);
+            protected void onPostExecute(String imageUrl) {
+                if (imageUrl == null) {
+                    Toast.makeText(StoryActivity.this,
+                            "Erreur génération de l'image", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                generatedImageView.setVisibility(View.VISIBLE);
+                Glide.with(StoryActivity.this)
+                        .load(imageUrl)
+                        .into(generatedImageView);
             }
+        }.execute(prompt);
+
+        // 5) Boutons Quitter / Recommencer
+        buttonQuit.setOnClickListener(v -> finish());
+        buttonRecommencer.setOnClickListener(v -> {
+            // pour repartir sur la même activité
+            recreate();
         });
-
-        // Initialize button visibility
-        updateNavigationButtonsVisibility(0);
-    }
-
-    private void updateNavigationButtonsVisibility(int position) {
-        prevButton.setVisibility(position > 0 ? View.VISIBLE : View.INVISIBLE);
-        nextButton.setVisibility(position < stories.size() - 1 ? View.VISIBLE : View.INVISIBLE);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (pagerAdapter != null) {
-            pagerAdapter.shutdown();
-        }
     }
 }

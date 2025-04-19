@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradient"
-    tools:context=".MainActivity">
+    android:background="@drawable/background_gradient">
 
-    <!-- Barre d'en-tête avec menu burger et profil -->
+    <!-- Header -->
     <LinearLayout
         android:id="@+id/header_bar"
         android:layout_width="match_parent"
@@ -16,10 +15,8 @@
         android:orientation="horizontal"
         android:paddingHorizontal="16dp"
         android:paddingVertical="16dp"
-        android:background="@android:color/transparent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Menu burger à gauche -->
         <ImageView
             android:id="@+id/icon_menu"
             android:layout_width="32dp"
@@ -33,7 +30,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <!-- Logo et texte de la crèche à droite -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,56 +55,43 @@
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Contenu principal centré -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- Contenu principal -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
         app:layout_constraintTop_toBottomOf="@id/header_bar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.4">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.4">
+            android:text="@string/bienvenue_sur"
+            android:textColor="#5D3A00"
+            android:textSize="48sp" />
 
-            <!-- TextView - Bienvenue sur -->
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/bienvenue_sur"
-                android:textAlignment="center"
-                android:textColor="#5D3A00"
-                android:textSize="48sp" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/dodolire_no_background" />
 
-            <!-- ImageView - Logo DodoLire avec enfant endormi sur un livre -->
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="180dp"
-                android:layout_height="180dp"
-                android:layout_marginTop="24dp"
-                android:src="@drawable/dodolire_no_background" />
-
-            <!-- Bouton Commencer -->
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/commencer"
-                android:textSize="24sp"
-                android:textColor="#FFFFFF"
-                android:backgroundTint="#5D3A00"
-                android:paddingHorizontal="32dp"
-                android:paddingVertical="12dp"
-                android:layout_marginTop="80dp" />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:text="@string/commencer"
+            android:textSize="24sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#5D3A00"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="12dp" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

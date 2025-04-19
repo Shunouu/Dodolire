@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="#EDE5D8">
 
-    <!-- Barre d’en-tête -->
+    <!-- Barre d’en-tête identique à tes autres écrans -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -41,7 +41,7 @@
             android:contentDescription="@string/profil_utilisateur" />
     </LinearLayout>
 
-    <!-- ScrollView contenant le formulaire -->
+    <!-- ScrollView contenant ton formulaire -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -57,7 +57,7 @@
             android:layout_marginBottom="24dp"
             android:background="@drawable/dotted_border_background">
 
-            <!-- Type de génération -->
+            <!-- Type -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
                 android:gravity="center"
                 android:textSize="16sp"
                 android:textColor="#5D3A00"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"/>
 
             <Spinner
                 android:id="@+id/spinner_type"
@@ -74,9 +74,9 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/spinner_background"
                 android:paddingStart="16dp"
-                android:paddingEnd="16dp" />
+                android:paddingEnd="16dp"/>
 
-            <!-- Âge du public -->
+            <!-- Âge -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
                 android:textColor="#5D3A00"
                 android:textSize="16sp"
                 android:gravity="center"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"/>
 
             <Spinner
                 android:id="@+id/spinner_age"
@@ -93,7 +93,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/spinner_background"
                 android:paddingStart="16dp"
-                android:paddingEnd="16dp" />
+                android:paddingEnd="16dp"/>
 
             <!-- Thème -->
             <TextView
@@ -103,7 +103,7 @@
                 android:textColor="#5D3A00"
                 android:textSize="16sp"
                 android:gravity="center"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"/>
 
             <Spinner
                 android:id="@+id/spinner_theme"
@@ -112,7 +112,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/spinner_background"
                 android:paddingStart="16dp"
-                android:paddingEnd="16dp" />
+                android:paddingEnd="16dp"/>
 
             <!-- Genre -->
             <TextView
@@ -122,7 +122,7 @@
                 android:textColor="#5D3A00"
                 android:textSize="16sp"
                 android:gravity="center"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"/>
 
             <Spinner
                 android:id="@+id/spinner_genre"
@@ -131,7 +131,7 @@
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/spinner_background"
                 android:paddingStart="16dp"
-                android:paddingEnd="16dp" />
+                android:paddingEnd="16dp"/>
 
             <!-- Prénom -->
             <TextView
@@ -141,7 +141,7 @@
                 android:textColor="#5D3A00"
                 android:textSize="16sp"
                 android:gravity="center"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"/>
 
             <EditText
                 android:id="@+id/edit_prenom"
@@ -154,10 +154,9 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:inputType="textPersonName"
-                android:autofillHints="personGivenName"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="16dp"/>
 
-            <!-- Mot clé -->
+            <!-- Mot‑clé -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -165,7 +164,7 @@
                 android:textColor="#5D3A00"
                 android:textSize="16sp"
                 android:gravity="center"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"/>
 
             <EditText
                 android:id="@+id/edit_mot_cle"
@@ -178,7 +177,7 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 android:inputType="text"
-                android:layout_marginBottom="24dp" />
+                android:layout_marginBottom="24dp"/>
 
             <!-- Bouton Générer -->
             <Button
@@ -189,7 +188,7 @@
                 android:text="@string/btn_generer"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#5D3A00"
-                android:elevation="4dp" />
+                android:elevation="4dp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

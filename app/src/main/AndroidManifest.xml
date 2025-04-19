@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    package="com.example.dodolire">
+
+    <!-- Permission réseau -->
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Dodolire"
-        tools:targetApi="31">
-        <!-- L'activité principale (MainActivity) -->
+        android:theme="@style/Theme.Dodolire">
+
+        <!-- MainActivity = page d'accueil, launcher -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -23,22 +24,21 @@
             </intent-filter>
         </activity>
 
-        <!-- L'activité de profil (ProfileActivity) -->
-        <activity
-            android:name=".ProfileActivity"
-            android:exported="false"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
+        <!-- Login / Inscription -->
+        <activity android:name=".LoginActivity"    android:exported="false"/>
+        <activity android:name=".RegisterActivity" android:exported="false"/>
 
-        <!-- L'activité formulaire (FormActivity) -->
-        <activity
-            android:name=".FormActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
+        <!-- Formulaire -->
+        <activity android:name=".FormActivity"     android:exported="false"/>
+
+        <!-- Story -->
+        <activity android:name=".StoryActivity"    android:exported="false"/>
+
+        <!-- Profil -->
+        <activity android:name=".ProfileActivity"  android:exported="false"/>
+
+        <!-- Archives -->
+        <activity android:name=".ArchiveActivity"  android:exported="false"/>
 
     </application>
-
 </manifest>

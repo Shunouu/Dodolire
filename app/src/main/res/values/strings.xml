@@ -28,6 +28,13 @@
     <string name="hint_prenom">Ex : Léo, Emma...</string>
     <string name="hint_mot_cle">Ex : Magie, courage, arc-en-ciel</string>
 
+    <!-- Suppression d'une histoire archivée -->
+    <string name="delete_archive">Supprimer</string>
+    <string name="delete_confirmation_message">Voulez-vous vraiment supprimer cette histoire archivée ?</string>
+    <string name="delete_confirmation_title">Confirmation</string>
+    <string name="story_deleted">Histoire supprimée</string>
+
+
     <!-- Boutons -->
     <string name="btn_generer">Générer</string>
 

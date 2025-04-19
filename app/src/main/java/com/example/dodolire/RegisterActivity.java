@@ -3,120 +3,112 @@ package com.example.dodolire;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Patterns;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ImageView;
-import android.util.Patterns;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText crecheNameEditText;
-    private EditText emailEditText;
-    private EditText passwordEditText;
-    private Button registerButton;
-    private TextView loginLink;
-    private TextView errorMessageText;
+    private EditText   crecheNameEditText;
+    private EditText   emailEditText;
+    private EditText   passwordEditText;
+    private Button     registerButton;
+    private TextView   loginLink;
+    private TextView   errorMessageText;
+    private ImageView  profileIcon;
+    private ImageView  menuIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // Initialisation des éléments de la vue
-        initViews();
-        setupHeaderActions();
-        setupListeners();
-    }
-
-    private void initViews() {
+        // 1) Récupération des vues
         crecheNameEditText = findViewById(R.id.creche_name);
-        emailEditText = findViewById(R.id.email);
-        passwordEditText = findViewById(R.id.password);
-        registerButton = findViewById(R.id.register_button);
-        loginLink = findViewById(R.id.login_link);
-        errorMessageText = findViewById(R.id.error_message);
+        emailEditText      = findViewById(R.id.email);
+        passwordEditText   = findViewById(R.id.password);
+        registerButton     = findViewById(R.id.register_button);
+        loginLink          = findViewById(R.id.login_link);
+        errorMessageText   = findViewById(R.id.error_message);
+        profileIcon        = findViewById(R.id.icon_profile);
+        menuIcon           = findViewById(R.id.icon_menu);
 
-        // Masquer le message d'erreur par défaut
+        // Masquer le message d'erreur au départ
         errorMessageText.setVisibility(TextView.INVISIBLE);
-    }
 
-    private void setupHeaderActions() {
-        ImageView profileIcon = findViewById(R.id.icon_profile);
-        ImageView menuIcon = findViewById(R.id.icon_menu);
+        // 2) Header : affichage conditionnel de l'icône Profil
+        SharedPreferences prefs = getSharedPreferences("user_data", MODE_PRIVATE);
+        boolean isLoggedIn = prefs.getBoolean("is_logged_in", false);
 
-        if (profileIcon != null && menuIcon != null) {
-            profileIcon.setOnClickListener(v -> {
-                // Action pour l'icône de profil - sur l'écran d'inscription, rediriger vers login
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-            });
-
-            menuIcon.setOnClickListener(v -> {
-                // Utiliser le MenuHelper pour afficher le menu burger
-                MenuHelper.showBurgerMenu(this, v);
-            });
+        profileIcon.setVisibility(isLoggedIn ? View.VISIBLE : View.GONE);
+        if (isLoggedIn) {
+            profileIcon.setOnClickListener(v ->
+                    startActivity(new Intent(RegisterActivity.this, ProfileActivity.class))
+            );
         }
-    }
 
-    private void setupListeners() {
-        // Action lors du clic sur le bouton "S'inscrire"
+        // Menu burger accessible même si non connecté (ou modifiez selon vos besoins)
+        menuIcon.setOnClickListener(v ->
+                MenuHelper.showBurgerMenu(this, v)
+        );
+
+        // 3) Configuration des listeners
         registerButton.setOnClickListener(v -> {
-            // Récupérer les valeurs des champs
             String crecheName = crecheNameEditText.getText().toString().trim();
-            String email = emailEditText.getText().toString().trim();
-            String password = passwordEditText.getText().toString().trim();
+            String email      = emailEditText.getText().toString().trim();
+            String password   = passwordEditText.getText().toString().trim();
 
-            // Vérification des entrées utilisateur
+            // Validation des champs
             if (crecheName.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 showError("Veuillez remplir tous les champs");
                 return;
             }
-
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 showError("Veuillez entrer un email valide");
                 return;
             }
-
             if (password.length() < 6) {
                 showError("Le mot de passe doit contenir au moins 6 caractères");
                 return;
             }
 
             // Vérifier si l'email existe déjà
-            SharedPreferences sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
-            String existingEmail = sharedPreferences.getString("email", "");
+            String existingEmail = prefs.getString("email", "");
             if (!existingEmail.isEmpty() && existingEmail.equals(email)) {
                 showError("Cet email existe déjà");
                 return;
             }
 
-            // Sauvegarde des données utilisateur dans SharedPreferences
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("creche_name", crecheName);
-            editor.putString("email", email);
-            editor.putString("password", password);
-            editor.putBoolean("is_logged_in", true);
-            editor.apply();
+            // Sauvegarder les données et marquer connecté
+            prefs.edit()
+                    .putString("creche_name", crecheName)
+                    .putString("email", email)
+                    .putString("password", password)
+                    .putBoolean("is_logged_in", true)
+                    .apply();
 
-            // Message de succès d'inscription
-            Toast.makeText(RegisterActivity.this, "Inscription réussie", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this,
+                    "Inscription réussie", Toast.LENGTH_SHORT).show();
 
-            // Redirection vers la page principale
+            // Rediriger vers FormActivity et fermer RegisterActivity
             Intent intent = new Intent(RegisterActivity.this, FormActivity.class);
             startActivity(intent);
-            finish(); // Ferme l'activité d'inscription après redirection
+            finish();
         });
 
-        // Action lors du clic sur le lien "Se connecter"
         loginLink.setOnClickListener(v -> {
             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-            finish(); // Ferme l'activité d'inscription
+            finish();
         });
     }
 
+    /** Affiche un message d'erreur sous le champ approprié */
     private void showError(String message) {
         errorMessageText.setText(message);
         errorMessageText.setVisibility(TextView.VISIBLE);

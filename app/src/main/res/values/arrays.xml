@@ -1,28 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="type_generation">
-        <item>Comptine / Histoire</item>
-        <item>Comptine</item>
-        <item>Histoire</item>
-    </string-array>
+<string-array name="array_type">
+    <item>Comptine</item>
+    <item>Histoire</item>
+</string-array>
 
-    <string-array name="age_enfant">
-        <item>Age</item>
-        <item>1 ans</item>
-        <item>2 ans</item>
-        <item>3 ans</item>
-    </string-array>
+<string-array name="array_age">
+    <item>1</item><item>2</item><item>3</item>
+</string-array>
 
-    <string-array name="theme_histoire">
-        <item>Héros</item>
-        <item>Aventure</item>
-        <item>Animaux</item>
-        <item>Nature</item>
-    </string-array>
+<string-array name="array_theme">
+    <item>Magie</item>
+    <item>Aventure</item>
+    <item>Animaux</item>
+    <item>Fantastique</item>
+</string-array>
 
-    <string-array name="genre_personnage">
-        <item>Genre</item>
-        <item>Garçon</item>
-        <item>Fille</item>
-        <item>Animal</item>
-    </string-array>
+<string-array name="array_genre">
+    <item>Garçon</item>
+    <item>Fille</item>
+    <item>Neutre</item>
+</string-array>
 </resources>
