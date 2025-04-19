@@ -24,11 +24,11 @@ DodoLire est une application Android conçue pour les crèches, permettant de g�
 
 Notre application a été développée par une équipe de 5 personnes, chacune responsable de différentes parties du projet:
 
-- *Yannis*: Développement de la page d'accueil
-- *Jean-Jacques*: Développement des pages d'inscription et de connexion
-- *John*: Développement de la page des histoires et de la lecture audio
-- *Lonnie*: Développement de la page d'archives
-- *Shun*: Développement du formulaire de génération, de la navigation (menu burger), et de la page profil
+•⁠  ⁠Yanis: Développement de la page d'accueil
+•⁠  ⁠Jean-Jacques: Développement des pages d'inscription, de connexion et faire la gestion de l'API
+•⁠  ⁠John: Développement de la page des histoires
+•⁠  ⁠Lonny: Développement de la page d'archives
+•⁠  ⁠Shun: Développement du formulaire de génération, de la navigation (menu burger), et de la page profil
 
 ## 📋 Structure de l'application
 
